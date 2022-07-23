@@ -1,0 +1,192 @@
+<!-- Navbar -->
+<admin-navbar></admin-navbar><br><br><br><br>
+
+<!-- heading -->
+<div class="d-flex justify-content-center">
+      <h2 class="heading">ManageUsers
+        <button class="addUserButton" (click)="addUserModal(addUserModalName)">+</button>
+      </h2>
+</div>
+
+<!-- loading -->
+<div *ngIf="loading" class="text-center mt-4">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+<!-- delete user popup -->
+<!-- <div class="alert alert-success error mx-auto p-2 mb-2" *ngIf="success">
+  <p class="m-3">{{ success }}</p>
+</div> -->
+
+<!-- user card -->
+<div class="container" *ngIf="!loading">
+  <div class="row">
+    <div class="col-12 col-md-4 col-lg-3" *ngFor="let user of usersDataList; let i=index">
+
+      <div class="d-flex justify-content-center text-center">
+        <div class="userCard shadow">
+          <!-- <img src="{{ user.url ? 'user.url' : 'assets/profile.svg'}} " class="userImg"/> -->
+          <img class="userImg" *ngIf="user.url" src="{{user.url}}">
+          <img class="userImg" *ngIf="!user.url" src="assets/profile.svg">
+            <p class="userName">{{ user.name}}</p>
+            <p *ngIf="!user.name">{{ user.email }}</p>
+            <p *ngIf="user.name">Department :{{user.department}}</p>
+            <p *ngIf="user.name">Project :{{ user.project}}</p>
+            <p>
+              <button class="btn btn-primary mx-2" (click)="editUserModal(editUserModalName,user)"><mat-icon>edit</mat-icon></button>
+              <button class="btn btn-danger" (click)="deleteUser(user)"><mat-icon>delete</mat-icon></button>
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add user modal -->
+<ng-template #addUserModalName let-c="close" let-d="dismiss">
+  <!-- modal header -->
+  <div class="modal-header">
+    <h4 class="modalTitle">Add User</h4>
+    <button class="closeX" type="button"(click)="d('Cross click')">x</button>
+  </div>
+  
+  <!--Add user modal boday -->
+  <div class="modal-body">
+    <div class="alert alert-danger error mx-auto p-2 mb-2" *ngIf="error && addUserSubmit">
+      <p class="m-3">{{ error }}</p>
+    </div>
+    <div class="alert alert-success error mx-auto p-2 mb-2" *ngIf="success && addUserSubmit">
+      <p class="m-3">{{ success }}</p>
+    </div>
+
+    <!-- add user form -->
+        <form [formGroup]="addUserForm" (ngSubmit)="addUserFormSubmit()" class="mt-0">
+                     <table>
+                        <tr>
+                          <td><label>Email</label></td>
+                            <td>
+                              <input type="text" formControlName="email" class="form-control" />
+                              <!-- Email validations -->
+                              <div *ngIf="addUserForm.get('email')?.errors && addUserSubmit">
+                              <div *ngIf="addUserForm.get('email')?.hasError('required')">
+                                <span style="color: red;">Please Enter Email.</span>
+                              </div>
+                              <div *ngIf="addUserForm.get('email')?.hasError('minlength')">
+                                <span style="color: red;">Email requied atleast 6 characters.</span>
+                              </div>
+                              <div *ngIf="addUserForm.get('email')?.hasError('maxlength')">
+                                <span style="color: red;">Email requied only 30 characters.</span>
+                              </div>
+                              <div *ngIf="addUserForm.get('email')?.hasError('pattern')">
+                                <span style="color: red;">Invalid Email</span>
+                              </div>
+                              </div>
+                            </td>
+                        </tr>
+                          
+                        <tr>
+                          <td><label>Password</label></td>
+                          <td>
+                            <input type="password" formControlName="password" class="form-control"/>
+                            <!-- password validation -->
+                            <div *ngIf="addUserForm.get('password')?.errors  && addUserSubmit">
+                              <div *ngIf="addUserForm.get('password')?.hasError('required')">
+                                  <span style="color: red;">Please Enter password.</span>
+                              </div>
+                              <div *ngIf="addUserForm.get('password')?.hasError('minlength')">
+                                  <span style="color: red;">password requied atleast 6 characters.</span>
+                              </div>
+                              <div *ngIf="addUserForm.get('password')?.hasError('maxlength')">
+                                  <span style="color: red;">password requied only 20 characters.</span>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                        
+                        <tr>
+                          <td><button type="submit" class="save_button">save</button></td>
+                        </tr>
+                      </table>
+        </form>
+  
+  </div>   
+      
+  <!--Add user modal footer -->
+  <div class="modal-footer">
+    <button type="submit" class="save_button" (click)="c('Save click')">Close</button>
+  </div>
+</ng-template>             
+
+<!-- Edit User modal -->
+<ng-template #editUserModalName let-c="close" let-d="dismiss">
+  <!-- modal header -->
+  <div class="modal-header">
+      <h4 class="modalTitle">Edit User</h4>
+      <button class="closeX" type="button"(click)="d('Cross click')">x</button>
+  </div>
+
+  <!--edit user modal body -->
+  <div class="modal-body">
+    <!-- edit user -->
+    <form [formGroup]="editUserForm" (ngSubmit)="editUser()">
+      <table>
+        <!-- name field -->
+        <tr>
+          <td><label>Name</label></td>
+          <td>
+            <input type="text" formControlName="name" class="form-control"/>
+              <div *ngIf="editUserForm.get('name')?.errors  && editUserSubmit">
+                <div *ngIf="editUserForm.get('name')?.hasError('required')">
+                    <span style="color: red;">Please Enter Name.</span>
+                </div>
+                <div *ngIf="editUserForm.get('name')?.hasError('minlength')">
+                    <span style="color: red;">Name requied atleast 3 characters</span>
+                </div>
+                <div *ngIf="editUserForm.get('name')?.hasError('maxlength')">
+                    <span style="color: red;">Name requied only 30 characters</span>
+                </div>
+                <div *ngIf="editUserForm.get('name')?.hasError('pattern')">
+                    <span style="color: red;">Only characters are allowed</span>
+                </div>
+              </div>  
+          </td>
+        </tr>
+        
+        <!-- Department field -->
+        <tr>
+          <td><label>Department</label></td>
+          <td>
+              <select formControlName="department" class="form-select">
+                  <option >Select Department</option>
+                  <option *ngFor="let d of departmentsList">{{d.department}}</option>
+              </select>
+              <div *ngIf="editUserForm.get('department')?.errors  && editUserSubmit">
+                  <div *ngIf="editUserForm.get('department')?.hasError('required')">
+                    <span style="color: red;">Please choose Department</span>
+                  </div>
+              </div>  
+          </td>
+        </tr>
+        
+        <tr>
+          <button type="submit" class="save_button m-2">save</button>
+          <button class="save_button" type="button" (click)="clear()">Clear</button>
+        </tr>
+      </table>
+    </form>
+  </div>
+  
+  <!--edit user modal footer -->
+  <div class="modal-footer">
+    <button type="submit" class="save_button"  (click)="c('Save click')">Close</button>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+  
+  

@@ -1,0 +1,38 @@
+<div class="main-content">
+    <div class="wrapper">
+      <nav>
+        <input type="checkbox" id="show-menu" />
+        <label for="show-menu" class="menu-icon"
+          ><fa-icon class="toggleBut" [icon]="navToggle"></fa-icon
+        ></label>
+        <div class="content">
+            
+          <div><a href="/userDashboard"><img src="assets/logo.png" class="logo"></a></div>
+          <ul class="links">
+            <li>
+              <a routerLink="/userDashboard" routerLinkActive="active">Home</a>
+            </li>
+  
+            <li><a routerLink="/userDashboard">Month Overview</a></li>
+          </ul>
+        </div>
+        <div class="user-wrapper">
+          <a href="/profile" title="view Profile">
+            <img
+              src="assets/profile.svg"
+              alt=""
+              width="40px "
+              height="40px"
+            />
+            <div *ngIf="!loading">
+              <!-- <h5>{{ userData.name}}</h5> -->
+              <small>User</small>
+            </div>
+          </a>
+          <div class="logout" (click)="logout()"><a routerLink="/login">Logout</a></div>
+        </div>
+      </nav>
+    </div>
+  </div>
+ <div *ngIf="loading"></div>
+  

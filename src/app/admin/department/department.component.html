@@ -1,0 +1,45 @@
+<!-- Navbar -->
+<admin-navbar></admin-navbar><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center mb-5 heading">Departments</h1>
+        
+        <div class="col-12 col-md-6">
+            <img src="assets/department.svg" class="deptImage">
+        </div>
+
+        <div class="col-12 col-md-6">
+            <!-- department Form -->
+            <form [formGroup]="departmentForm" (ngSubmit)="addDepartment()" class="text-center my-3">
+                <div class="d-flex justify-content-center">
+                    <input type="text" placeholder="department name" class="form-control" style="width:60%; height:80%" formControlName="department">
+                        &nbsp;
+                    <button type="submit" class=" client_button">Add</button>
+                </div>
+                <div *ngIf="departmentForm.get('department')?.errors && departmentSubmit">
+                    <div *ngIf="departmentForm.get('department')?.hasError('required')">
+                      <span style="color: red;">Please Enter department Name</span>
+                    </div>
+                </div>
+            </form>  
+
+            <!-- show the department Info   -->
+            <div class="d-flex justify-content-center">
+                <table>
+                       <tr *ngFor="let department of departmentList" let i="index" class="shadow">
+                            <td>
+                                {{department.department}}
+                            </td>
+                            <td>
+                                <mat-icon (click)="onDelete(department)" style="cursor:pointer">delete</mat-icon>
+                            </td>
+                        </tr>
+                </table>
+            </div>
+         </div>
+    </div>
+</div>
+
+
+

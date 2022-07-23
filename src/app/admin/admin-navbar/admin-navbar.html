@@ -1,0 +1,61 @@
+<div class="main-content">
+  <div class="wrapper">
+    <nav>
+      <input type="checkbox" id="show-menu" />
+      <label for="show-menu" class="menu-icon"
+        ><fa-icon [icon]="navToggle"></fa-icon
+      ></label>
+      <div class="content">
+       <a href="/admin" class="text-center"><img src="/assets/logo.png" class="logo"></a>
+        <ul class="links">
+          <li>
+            <a routerLink="/admin">Home </a>
+          </li>
+
+          <li>
+            <a class="desktop-link"
+              >Manage<fa-icon
+                style="padding-left: 5px"
+                class="dropdownIcon"
+                [icon]="dropdownToggle"
+              ></fa-icon
+            ></a>
+            <input type="checkbox" id="show-features" />
+            <label for="show-features"
+              >Manage<fa-icon
+                style="padding-left: 5px"
+                class="dropdownIcon"
+                [icon]="dropdownToggle"
+              ></fa-icon
+            ></label>
+            <ul>
+              <li><a routerLink="/client">Clients</a></li>
+              <li><a routerLink="/department">Departments</a></li>
+              <li><a routerLink="/project">Projects</a></li>
+              <li><a routerLink="/assignment">Assignment</a></li>
+              <li><a routerLink="/users">Users</a></li>
+            </ul>
+          </li>
+          <li><a routerLink="/timesheet">Edit Timesheets</a></li>
+        </ul>
+      </div>
+      <div class="user-wrapper" *ngIf="!loading">
+        <a routerLink="/Profile" href="#" title="view Profile">
+          
+          <img src="{{profileData[0]?.url}}"
+          width="40px "
+            height="40px">
+            
+          <div class="d-none d-md-block">
+            <h5>gowri</h5>
+            <small style="font-size:12px">admin</small>
+          </div>
+        </a>
+       
+        <div class="logout"><a (click)="logout()" mat-raised-button matTooltipClass="example-tooltip-red"
+          #tooltip="matTooltip"
+          matTooltip="logout" style="cursor:pointer"><mat-icon>logout</mat-icon></a></div>
+      </div>
+    </nav>
+  </div>
+</div>

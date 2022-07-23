@@ -1,0 +1,161 @@
+*{
+  font-family: 'Noto Sans', sans-serif;
+ 
+  
+}
+  .card-single {
+    display: flex;
+    width: 250px;
+    height: 130px;
+    justify-content: space-between;
+    background: #feffff;
+    padding: 2rem;
+    border: 1px solid #def2f1;
+    border-radius: 2px;
+    align-items: center;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+.card-single:hover{
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+.recent-grid {
+  margin-top: 3.5rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: 65% auto;
+}
+.card1 {
+  background: #feffff;
+  border-radius: 5px;
+  border: 1px solid #e2d6ff;
+}
+.card-header,
+.card-body {
+  padding: 0.5rem;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #733df4;
+  background: #f3eeff;
+}
+.card-header h2 {
+  color: #733df4;
+}
+
+.card-header button {
+  background: #733df4;
+  border-radius: 10px;
+  color: #e2d6ff;
+  font-size: 1rem;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid #733df4;
+}
+
+.card-header button:hover {
+  color: #733df4;
+  background-color:#e2d6ff;
+}
+
+table {
+  border-collapse: collapse;
+}
+thead tr {
+  color: #733df4;
+  border-top: 1px solid #e2d6ff;
+  border-bottom: 1px solid #e2d6ff;
+}
+td {
+  text-align: center;
+  vertical-align: middle;
+}
+thead td {
+  font-size: 15px;
+  font-weight: 700;
+  padding: 1rem 1rem;
+}
+tbody tr td {
+  font-size: 15px;
+  padding: 0.7rem 0.7rem;
+  color: #17252a;
+}
+
+tr td:last-child {
+  display: flex;
+  align-items: center;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.customer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 0.7rem;
+}
+.info {
+  display: flex;
+  align-items: center;
+}
+.info img {
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+.info h4 {
+  font-weight: 00;
+  color: #733df4;
+}
+.info small {
+  font-weight: 300;
+  font-size: 0.5rem;
+  color: grey;
+}
+.contact small {
+  font-size: 0.8 rem;
+}
+.contact span {
+  display: inline-block;
+  margin-left: 0.5rem;
+  color: #733df4;
+  font-size: 16px;
+}
+h2 {
+  font-size: 20px;
+}
+h4 {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 960px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .recent-grid {
+    grid-template-columns: 100%;
+  }
+}
+@media screen and (max-width: 560px) {
+  .cards {
+    margin-left: 50px;
+    grid-template-columns: 100%;
+  }
+  thead td {
+    font-size: 12px;
+  }
+  tbody tr td {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .pageMain {
+    margin-left: 40px;
+  }
+}

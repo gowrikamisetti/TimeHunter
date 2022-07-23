@@ -1,0 +1,138 @@
+
+<admin-navbar></admin-navbar><br><br><br>
+<div class="container">
+    <div class="row">
+
+<!-- space -->
+<div class="col-12 m-4">
+
+</div>
+
+<!-- loading -->
+
+
+<!-- profile  -->
+<div class="col-12 col-md-6 d-flex justify-content-center">
+   <div class="box shadow">
+    <div *ngFor="let p of profileData" let i ='index' class="text-center">
+        <div *ngIf="loading" class="d-flex justify-content-center">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <img src="{{p.url}}" (click)="inputField.click()" class="img"/>
+        <button class="edit" (click)="onEdit(p)"><mat-icon>edit</mat-icon></button>
+        <hr>
+        <div class="d-flex justify-content-around">
+            <table *ngIf="hidden">
+                <tr>
+                    <td><label>Name</label></td>
+                    <td>{{p.name}}</td>
+                </tr>
+                <tr>
+                    <td><label>Email</label></td>
+                    <td>{{p.email}}</td>
+                </tr>
+                <tr>
+                    <td><label>Mobile</label></td>
+                    <td>{{p.mobile}}</td>
+                </tr>
+                <tr>
+                    <td><label>Role</label></td>
+                    <td>{{p.role}}</td>
+                </tr>
+            </table>
+            <!-- <table *ngIf="hidden">
+                
+            </table> -->
+        </div>
+        <input #inputField type="file" (change)="profileUpdate($event)" hidden/>
+    </div>
+        <div *ngIf="!hidden">
+            <form [formGroup]="profileForm" (ngSubmit)="save()">
+                       <div class="d-flex justify-content-center">
+                        <table>
+                            <tr>
+                                <td><label>Name</label></td>
+                                <td><input class="form-control"  formControlName="name" type="text" />
+                                    <div *ngIf="profileForm.get('name')?.errors  && isSubmit">
+                                        <div *ngIf="profileForm.get('name')?.hasError('required')">
+                                            <span style="color: red;">Please Enter name</span>
+                                        </div>
+                                        
+                                      </div>  </td>
+                            </tr>
+                            <tr>
+                                <td><label>Role</label></td>
+                                <td><input class="form-control" formControlName="role" type="text" />
+                                    <div *ngIf="profileForm.get('role')?.errors  && isSubmit">
+                                        <div *ngIf="profileForm.get('role')?.hasError('required')">
+                                            <span style="color: red;">Please enter Role</span>
+                                        </div>
+                                        
+                                      </div>  </td>
+                            </tr>
+                            <tr>
+                                <td><label>Mobile</label></td>
+                                <td><input class="form-control" formControlName="mobile" type="text" />
+                                    <div *ngIf="profileForm.get('mobile')?.errors  && isSubmit">
+                                        <div *ngIf="profileForm.get('mobile')?.hasError('required')">
+                                            <span style="color: red;">Please enter mobile number</span>
+                                        </div>
+                                        
+                                      </div>  </td>
+                            </tr>
+                        </table>
+                       </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary m-2" type="submit">Save</button>
+                            <button class="btn btn-danger">Cancel</button>
+                        </div>
+                       
+            </form>
+              
+             
+         </div>
+         
+
+     
+   
+   </div>
+    
+</div>
+
+<!-- change password -->
+<div class="col-12 col-md-5 mt-4" *ngIf="!loading">
+    <div class="box">
+        <h2 class="mb-2" style="font-size:25px">Change password</h2>
+        <div class="text-center" *ngIf="change">
+            
+            <img src="assets/change.svg" style="width:50%; height:50%" (click)="changeImg()">
+        </div>
+         <div *ngIf="!change">
+            
+        <form [formGroup]="changePswd" (ngSubmit)="changePsd()">
+            <table>
+                <tr>
+                    <td><label>Current Password</label></td>
+                    <td><input type="text" class="form-control" formControlName="currentPswd"></td>
+                </tr>
+                <tr>
+                    <td><label>New Password</label></td>
+                    <td><input type="text" class="form-control" formControlName="newPswd"></td>
+                </tr>
+                <tr>
+                    <td><label>Re-enter Password</label></td>
+                    <td><input type="text" class="form-control" formControlName="reEnter"></td>
+                </tr>
+                
+            </table>
+            <button type="submit" class="btn btn-success">Change</button>
+        </form>
+        </div> 
+    </div>
+</div>
+    </div>
+</div>
+    
+  
+
+

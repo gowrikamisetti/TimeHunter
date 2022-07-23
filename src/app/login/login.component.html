@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row">
+  
+    <!-- login Image visible medium devices-->
+    <div class="col-12 col-md-6 mt-5 pt-5 d-flex justify-content-center">
+      <img src="/assets/login_img.svg" class="login_img d-none d-md-block">
+    </div>
+
+    
+    <div class="col-12 col-md-6">
+
+        <!-- Timehunt logo -->
+        <div class="Timehunt_logo">
+          <img src="/assets/TimeHunt_img.png" class="logo my-3">
+        </div>
+
+        <!-- Error message -->
+        <div class="alert alert-danger error mx-auto p-2 mb-2" *ngIf="error">
+          <p class="m-3">{{ error }}</p>
+        </div>
+
+        <!--loading -->
+        <div *ngIf="loading" class="d-flex justify-content-center">
+          <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <!-- login Box -->
+        <div class="login_box mx-auto" *ngIf="!loading">
+              <h2 class="text-center login_title">Login</h2>
+
+              <!-- Login Form -->
+              <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+                  <!-- Email -->
+                  <mat-form-field>
+                      <input type="text" matInput placeholder="Username" formControlName="email">
+                  </mat-form-field>
+
+                    <!-- Email Validations -->
+                    <div *ngIf="loginForm.get('email')?.errors && isSubmit">
+                      
+                      <div *ngIf="loginForm.get('email')?.hasError('')">
+                        <span style="color: red;">Please Enter Email.</span>
+                      </div>
+                      <div *ngIf="loginForm.get('email')?.hasError('minlength')">
+                        <span style="color: red;">Email requied atleast 6 characters.</span>
+                      </div>
+                      <div *ngIf="loginForm.get('email')?.hasError('maxlength')">
+                        <span style="color: red;">Email requied only 20 characters.</span>
+                      </div>
+                      <div *ngIf="loginForm.get('email')?.hasError('pattern')">
+                        <span style="color: red;">Invalid Email</span>
+                      </div>
+
+                    </div>
+        
+                  <!-- password -->
+                  <mat-form-field>
+                      <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+                      <mat-icon style="font-size:20px" color="primary" matSuffix (click)="hide = !hide">
+                          {{hide ? 'visibility_off' : 'visibility'}}
+                      </mat-icon>
+                  </mat-form-field>
+
+                  <!-- Password validation -->
+                  <div *ngIf="loginForm.get('email')?.errors && isSubmit">
+                      
+                    <div *ngIf="loginForm.get('email')?.hasError('')">
+                      <span style="color: red;">Please Enter password.</span>
+                    </div>
+                    <div *ngIf="loginForm.get('email')?.hasError('minlength')">
+                      <span style="color: red;">Password requied atleast 6 characters.</span>
+                    </div>
+
+                  </div>
+
+                  <!-- Forgot pasword link -->
+                  <div class="forgot_pswd_link">
+                        <a class="link" routerLink="/forgotPassword">Forgot passsword</a>
+                  </div>
+                    
+                  <!-- login Button -->
+                  <div>
+                    <button class="login_button" type="submit">Login</button>
+                  </div>
+                
+              </form>
+
+        </div>
+    </div>
+  </div>
+</div>

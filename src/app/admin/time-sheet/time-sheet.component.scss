@@ -1,0 +1,45 @@
+
+*{
+  font-family: 'Noto Sans', sans-serif;
+}
+.usersTable{
+  width:50%;
+  cursor: pointer;
+  border:1px solid black;
+  border-radius:3px;
+}
+th{
+  background-color: #7342C9;
+  color:white;
+  padding:10px
+}
+.img{
+    width:80%;
+    height:90%
+}
+.Button {
+    border-radius: 4px;
+    background-color: green;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.Button span {
+   display: inline-block;
+   transition: 0.5s;
+}
+.Button span:after {
+    content: "\00bb";
+    position: absolute;
+    right: -20px;
+    transition: 0.5s;
+}
+.Button:hover span {
+  padding-right: 25px;
+}
+
+
+
+

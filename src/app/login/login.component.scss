@@ -1,0 +1,68 @@
+*{
+   font-family: 'Noto Sans', sans-serif;
+   font-size:13px;
+}
+
+// login Image
+.login_img{
+    height:90%;
+    width:90%
+}
+
+// Timehunt logo
+.Timehunt_logo{
+    text-align:center;
+}
+.logo{
+    width:60%
+}
+
+// error
+.error{
+    max-width: 450px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+// Login_box
+.login_box{
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px 10px #ede4fc;
+  background: #feffff;
+  max-width: 500px;
+  padding: 45px;
+}
+.login_title{
+    font-size:25px;
+    color:#673ab7
+}
+Mat-form-field{
+    width:100%;
+    color:black;
+    border: red;
+}
+
+//forgot password link
+.link{
+    color:#673ab7;
+}
+.forgot_pswd_link{
+   text-align:right;
+    color:#673ab7;
+}
+
+//login button
+.login_button{
+    background-color: #7342c9;
+    color:white;
+    border:0px;
+    border-radius:5px;
+    padding:10px;
+}
+button:hover{
+    background-color:#5514c7;
+}
+
+
+
+

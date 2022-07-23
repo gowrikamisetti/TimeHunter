@@ -1,0 +1,41 @@
+<!-- Navbar -->
+<admin-navbar></admin-navbar><br><br><br><br>
+
+<div class="container">
+    <div class="row">
+
+        <!-- loading -->
+        <div *ngIf="loading" class="d-flex justify-content-center">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+
+        <!-- users table -->
+        <div class="col-12 col-md-6" *ngIf="!loading">
+            <div class="d-flex justify-content-center">
+                <table class="usersTable">
+                    <thead>
+                        <tr>
+                            <th>
+                                Users
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of sa" let i="index">
+                            <td (click)="nameUser(user)">{{ user.name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-5 text-center">
+                <a href="/userDashboard" target="_blank" class="Button p-3 m-2" style="padding: 5px"><span>Edit {{name}} TimeSheet</span></a>
+            </div>
+        </div>
+    
+        <!-- timehunt image -->
+        <div class="col-12 col-md-6 d-none d-md-block" *ngIf="!loading">
+            <img src="assets/Timesheet.svg" class="img">
+        </div>
+        
+    </div>
+</div>

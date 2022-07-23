@@ -1,0 +1,132 @@
+<!-- Navbar -->
+<admin-navbar></admin-navbar><br /><br /><br />
+
+<!-- add projects button -->
+<div class="col-12 d-flex justify-content-center">
+  <h2 class="heading my-3 pb-2">Projects <button class="addProjectButton" (click)="projectModal(projectModalName,'')"><mat-icon>add</mat-icon></button></h2>
+</div>
+
+    <!-- searchbar -->
+    <!-- <div class="col-12 d-flex justify-content-right">
+      <div>
+        
+          <input type="search" placeholder="Search"
+          [(ngModel)]="searchText"
+          [ngModelOptions]="{ standalone: true }" class="form-control" />
+       </div>
+       <div>
+       <button type="button" class="search">   <mat-icon class="pt-1">search</mat-icon></button>
+        
+       </div>  
+       
+        
+      </div> -->
+   
+<!-- loading -->
+<div *ngIf="loading" class="text-center m-5">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<!-- project card -->
+<div *ngIf="!loading">
+  
+    <div class="container">
+      <div class="projectCard" *ngFor="let project of projectsDataList | projectSearch: searchText:'project';let i = index">
+        <div class="badge tag" [ngClass]="project.active ? 'tag-active' : 'tag-inactive' ">
+          {{ project.active? 'Active':'Inactive' }}
+        </div>
+        <div class="card-body">
+          <div class="cardArrangement">
+            <h4 class="projectName">{{ project.project }}</h4>
+          </div>
+          <div class="cardArrangement">
+            <img src="assets/profile.svg" class="profile"/>
+            <div class="clientName">
+              <h4>{{ project.client }}</h4>
+            </div>
+          </div>
+          <div class="cardArrangement">
+            <span class="usersCountIcon"><fa-icon [icon]="userIcon"></fa-icon></span>
+            <div class="usersCount">
+              <h4>0</h4>
+            </div>
+          </div>
+          <div class="buttons">
+            <button (click)="deleteProject(project)" class="btn editButton"><mat-icon>delete</mat-icon></button>
+            <button (click)="projectModal(projectModalName,project)" (click)="mode()" class="btn editButton"><mat-icon>edit</mat-icon></button>
+          </div>
+        </div>
+        </div>
+      
+    </div>
+  
+ 
+</div>
+
+<!-- project modal -->
+<ng-template #projectModalName let-c="close" let-d="dismiss">
+  <!-- modal header -->
+  <div class="modal-header">
+    <h4 class="modalTitle" *ngIf="!editmode">Add Project</h4>
+    <h4 class="modalTitle" *ngIf="editmode">Edit Project</h4>
+    <button type="button" class="close pb-1" (click)="d('Cross click')">x</button>
+  </div>
+  <!-- modal body -->
+  <div class="modal-body">
+        <!-- Add and edit projects form -->
+        <form [formGroup]="projectForm" (ngSubmit)="manageProjects()" class="mt-0">
+                    <table>
+                      <!-- project name field -->
+                        <tr>
+                            <td><label>Project Name</label></td>
+                            <td>
+                              <input type="text" formControlName="project" class="form-control" />
+                              <div *ngIf="projectForm.get('project')?.errors && projectSubmit">
+                                <div *ngIf="projectForm.get('project')?.hasError('required')">
+                                  <span style="color: red;">Please Enter project name</span>
+                                </div>
+                                <div *ngIf="projectForm.get('project')?.hasError('minlength')">
+                                  <span style="color: red;">Project requied atleast 2 characters</span>
+                                </div>
+                                <div *ngIf="projectForm.get('project')?.hasError('maxlength')">
+                                  <span style="color: red;">Project requied only 20 characters</span>
+                                </div>
+                              </div>
+                            </td>
+                        </tr>
+                        <!-- client name field -->
+                        <tr>
+                          <td><label class="label">Client Name</label></td>
+                          <td>
+                            <select formControlName="client" class="form-select" aria-label="Default select example">
+                              <option >Select Client</option>
+                              <option *ngFor="let client of clientsList">
+                                {{client.client}}
+                              </option>
+                            </select>
+                            <div *ngIf="projectForm.get('client')?.errors && projectSubmit">
+                              <div *ngIf="projectForm.get('client')?.hasError('required')">
+                                <span style="color: red;">Please choose client</span>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                       <!-- status field -->
+                        <tr>
+                          <td ><label class="label">Status</label></td>
+                          <td class="text-start"><input type="checkbox" formControlName="active"></td>
+                        </tr>
+                        
+                        <tr>
+                          <td><button type="submit" class="save_button">save</button></td>
+                        </tr>
+                    </table>
+        </form>
+  </div>
+  <!-- modal footer    -->
+  <div class="modal-footer">
+    <button type="submit" class="save_button" (click)="c('Save click')">Close</button>
+  </div>
+</ng-template>
+  
+  

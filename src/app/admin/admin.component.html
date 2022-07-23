@@ -1,0 +1,118 @@
+<admin-navbar></admin-navbar><br><br><br><br>
+<div class="container">
+   <div class="row">
+    <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+        <div class="card-single" routerLink="/users">
+            <div>
+              <h1>{{ usersData?.length }}</h1>
+              <span>Employees</span>
+            </div>
+            <div>
+              <span><fa-icon [icon]="usersIcon"></fa-icon></span>
+            </div>
+          </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+          <div class="card-single" routerLink="/client">
+            <div>
+              <h1>{{ clientData?.length }}</h1>
+              <span>Clients</span>
+            </div>
+            <div>
+              <span><fa-icon [icon]="clientsIcon"></fa-icon></span>
+            </div>
+          </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+          <div class="card-single" routerLink="/department">
+            <div>
+              <h1>{{ deptData?.length }}</h1>
+              <span>Departments</span>
+            </div>
+            <div>
+              <span><fa-icon [icon]="deptIcon"></fa-icon></span>
+            </div>
+          </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+          <div class="card-single" routerLink="/project">
+            <div>
+              <h1>{{ projectData?.length }}</h1>
+              <span>Projects</span>
+            </div>
+            <div>
+              <span><fa-icon [icon]="projectIcon"></fa-icon></span>
+            </div>
+          </div>
+    </div>
+
+    <div class="recent-grid">
+      <div class="projects">
+        <div class="card1">
+          <div class="card-header">
+            <h2>Recent Projects</h2>
+            <a href="/projectsPage"
+              ><button>
+                View all
+                <span><fa-icon [icon]="arrowRightIcon"></fa-icon></span></button
+            ></a>
+          </div>
+          <div class="card-body">
+            <div class="table-responisve">
+              <table width="100%">
+                <thead>
+                  <tr>
+                    <td>#</td>
+                    <td>Project Title</td>
+                    <td>User name</td>
+                    <td>Start Date</td>
+                    <td>Deadline</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let projectData of sa; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ projectData.project }}</td>
+                    <td>{{ projectData.name }}</td>
+                    <td>{{ projectData.startDate }}</td>
+                    <td>{{ projectData.endDate }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="customers">
+        <div class="card">
+          <div class="card-header">
+            <h2>New Users</h2>
+            <a href=""
+              ><button>
+                View all
+                <span><fa-icon [icon]="arrowRightIcon"></fa-icon></span></button
+            ></a>
+          </div>
+          <div class="card-body"  *ngFor="let projectData of sa; let i = index">
+            <div class="customer">
+              <div class="info">
+               
+                <div>
+                  <h4>{{projectData.name}}</h4>
+                  <!-- <small>Developer</small> -->
+                </div>
+              </div>
+              <div class="contact">
+                <span>{{projectData.departments}}</span>
+                
+              </div>
+            </div>
+  
+            
+          </div>
+        </div>
+      </div>
+    </div>
+   </div>
+
+  </div>

@@ -1,0 +1,173 @@
+<app-user-header></app-user-header><br><br><br>
+<div class="d-flex justify-content-center m-3">
+    <button class="btn save" style="font-size:13px" (click)="addopen(box,'')">Add Task</button>
+</div>
+<div class="container">
+    <div class="row" *ngIf="!loading">
+        <div class="col-12 col-md-3 box shadow m-3 p-3" *ngFor="let u of taskData">
+
+                <!-- <div > -->
+                    <h1 class="text-center">{{u.date}}</h1>
+                    <h2  class="text-center">{{u.title}}</h2>
+                    <p style="font-size:13px" class="text-center">{{u.description}}</p>
+                    <p class="text-center" style="font-size:12px">Duration {{u.startTime }} - {{u.endTime}}</p>
+                <!-- </div> -->
+            
+        </div>
+    </div>
+</div>
+
+
+<ng-template #box let-c="close" let-d="dismiss">
+
+    <div class="modal-header">
+    
+      <h4 class="modal-title" id="modal-basic-title">Add Task</h4>
+    
+      <button type="button" class="close pb-1" (click)="d('Cross click')">x</button>
+    
+    </div>
+    
+    <div class="modal-body">
+    
+          <form [formGroup]="taskForm" (ngSubmit)="save()" class="mt-0 text-center">
+                       <table>
+                          <tr>
+                            <td><label class="label">Task Title</label></td>
+                              <td>
+                                <input type="text" formControlName="title" class="form-control" />
+                                <div *ngIf="taskForm.get('title')?.errors && isSubmit">
+                                <div *ngIf="taskForm.get('title')?.hasError('required')">
+                                  <span style="color: red;">Please Enter title</span>
+                                </div>
+                                <div *ngIf="taskForm.get('title')?.hasError('')">
+                                  <span style="color: red;">Please Enter title</span>
+                                </div>
+                                <div *ngIf="taskForm.get('title')?.hasError('minlength')">
+                                  <span style="color: red;">The title requied atleast 5 characters</span>
+                                </div>
+                                <div *ngIf="taskForm.get('title')?.hasError('maxlength')">
+                                  <span style="color: red;">The title requied only 80 characters</span>
+                                </div>
+                               
+                                </div>
+                               </td>
+                          </tr>
+                          
+                          <tr>
+                            <td><label class="label">Description</label></td>
+                          <td>
+                           
+                                <textarea type="text" formControlName="description" class="form-control"></textarea>
+                                <div *ngIf="taskForm.get('description')?.errors && isSubmit">
+                                <div *ngIf="taskForm.get('description')?.hasError('required')">
+                                  <span style="color: red;">Please Enter description</span>
+                                </div>
+                                <div *ngIf="taskForm.get('description')?.hasError('')">
+                                  <span style="color: red;">Please Enter description</span>
+                                </div>
+                                <div *ngIf="taskForm.get('description')?.hasError('minlength')">
+                                  <span style="color: red;">The description requied atleast 5 characters</span>
+                                </div>
+                                <div *ngIf="taskForm.get('description')?.hasError('maxlength')">
+                                  <span style="color: red;">The description requied only 80 characters</span>
+                                </div>
+                               
+                                </div>
+                               
+                          </td>
+                          </tr>
+                          <tr>
+                            <td><label class="label">Date</label></td>
+                          <td>
+                           
+                                <input type="date" formControlName="date" class="form-control" />
+                                <div *ngIf="taskForm.get('date')?.errors && isSubmit">
+                                <div *ngIf="taskForm.get('date')?.hasError('required')">
+                                  <span style="color: red;">Please Enter date</span>
+                                </div>
+                                <div *ngIf="taskForm.get('date')?.hasError('')">
+                                  <span style="color: red;">Please Enter date</span>
+                                </div>
+                                <div *ngIf="taskForm.get('date')?.hasError('minlength')">
+                                  <span style="color: red;">The date requied atleast 5 characters</span>
+                                </div>
+                                <div *ngIf="taskForm.get('date')?.hasError('maxlength')">
+                                  <span style="color: red;">The date requied only 80 characters</span>
+                                </div>
+                               
+                                </div>
+                               
+                          </td>
+                          </tr>
+                          <tr>
+                            <td><label class="label">Start Time</label></td>
+                          <td>
+                           
+                                <input type="text" formControlName="startTime" class="form-control" />
+                                <div *ngIf="taskForm.get('startTime')?.errors && isSubmit">
+                                <div *ngIf="taskForm.get('startTime')?.hasError('required')">
+                                  <span style="color: red;">Please Enter startTime</span>
+                                </div>
+                                <div *ngIf="taskForm.get('startTime')?.hasError('')">
+                                  <span style="color: red;">Please Enter startTime</span>
+                                </div>
+                                <div *ngIf="taskForm.get('startTime')?.hasError('minlength')">
+                                  <span style="color: red;">The startTime requied atleast 5 characters</span>
+                                </div>
+                                <div *ngIf="taskForm.get('startTime')?.hasError('maxlength')">
+                                  <span style="color: red;">The startTime requied only 80 characters</span>
+                                </div>
+                               
+                                </div>
+                               
+                          </td>
+                          </tr>
+                          <tr>
+                            <td><label class="label">End Time</label></td>
+                          <td>
+                           
+                                <input type="text" formControlName="endTime" class="form-control" />
+                                <div *ngIf="taskForm.get('endTime')?.errors && isSubmit">
+                                <div *ngIf="taskForm.get('endTime')?.hasError('required')">
+                                  <span style="color: red;">Please Enter endTime</span>
+                                </div>
+                                <div *ngIf="taskForm.get('endTime')?.hasError('')">
+                                  <span style="color: red;">Please Enter endTime</span>
+                                </div>
+                                <div *ngIf="taskForm.get('endTime')?.hasError('minlength')">
+                                  <span style="color: red;">The endTime requied atleast 5 characters</span>
+                                </div>
+                                <div *ngIf="taskForm.get('endTime')?.hasError('maxlength')">
+                                  <span style="color: red;">The endTime requied only 80 characters</span>
+                                </div>
+                               
+                                </div>
+                               
+                          </td>
+                          </tr>
+                          <tr>
+                            <td><button type="submit" class="save">save</button></td>
+                            
+                          </tr>
+                            
+                            
+                      </table>
+          </form>
+    
+       
+        
+         <div class="modal-footer">
+    
+      <button type="submit" class="save"  (click)="c('Save click')">Close</button>
+    </div>
+    
+    </div>
+    </ng-template>
+<div *ngIf="loading" class="text-center">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+
+    
+    
+    

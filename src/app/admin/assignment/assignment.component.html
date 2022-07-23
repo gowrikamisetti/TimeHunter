@@ -1,0 +1,91 @@
+<!-- Navbar -->
+<admin-navbar></admin-navbar><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 m-4"></div>
+        <!-- users table -->
+        <div class="col-12 col-md-6">
+            <table class="usersTable">
+                <thead>
+                    <tr>
+                        <th>
+                            Users
+                        </th>
+                        <th>
+                            Departments
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of usersNeededDataList" (click)="userAssignment(user)" >
+                        <td >
+                            {{user.name}}
+                        </td>
+                        <td>
+                            {{user.departments}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-12 col-md-6">
+            <div *ngIf="hidden" class="d-none d-md-block" >
+                <img src="assets/assign.svg" style="width:90%">
+            </div>
+           <div *ngIf="!hidden">
+                <h1 class="text-center heading">Assign Project to {{name}}:</h1>
+                <div class="d-flex justify-content-center shadow p-3 m-3" >
+                    <!-- assignment form -->
+                    <form [formGroup]="assignmentForm" (ngSubmit)="assignProjectToUser()" class="text-center">
+                            <table class="assignTable">
+                                <!-- project field -->
+                                <tr>
+                                    <td>Project</td>
+                                    <td>
+                                        <select formControlName="project" class="form-select">
+                                                <option >Select Projects</option>
+                                                <option *ngFor="let project of projectsDataList">
+                                                    {{project}}
+                                                </option>
+                                        </select>
+                                        <div *ngIf="assignmentForm.get('project')?.errors && assignmentSubmit">
+                                            <div *ngIf="assignmentForm.get('project')?.hasError('required')">
+                                            <span style="color: red;">Please choose project</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- start date field -->
+                                <tr>
+                                    <td>Start Date</td>
+                                    <td>
+                                        <input type="date" formControlName="startDate" class="form-control">
+                                        <div *ngIf="assignmentForm.get('startDate')?.errors && assignmentSubmit">
+                                            <div *ngIf="assignmentForm.get('startDate')?.hasError('required')">
+                                                <span style="color: red;">Please fill startDate</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <!-- end date field -->
+                                <tr>
+                                    <td>End Date</td>
+                                    <td>
+                                        <input type="date" formControlName="endDate" class="form-control">
+                                        <div *ngIf="assignmentForm.get('endDate')?.errors && assignmentSubmit">
+                                            <div *ngIf="assignmentForm.get('endDate')?.hasError('required')">
+                                                <span style="color: red;">Please fill endDate</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        <button type="submit" class="btn btn-success">save</button>
+                    </form>
+        
+                </div>
+           </div>
+        </div>
+    </div>
+</div>    

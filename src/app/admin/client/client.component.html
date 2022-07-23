@@ -1,0 +1,42 @@
+<!-- Navbar -->
+<admin-navbar></admin-navbar><br><br><br>
+
+<div class="container">
+    <div class="row">
+        <h1 class="text-center heading my-3">Clients</h1>
+        <div class="col-12 col-md-6 text-center">
+            <img src="assets/client.png" class="clientImage">
+        </div>
+        <div class="col-12 col-md-6">
+            <!-- Add client form -->
+            <form [formGroup]="clientForm" (ngSubmit)="addClient()" class="text-center">
+                    <div class="d-flex justify-content-center">
+                            <input type="text" placeholder="Client name" class="form-control" style="width:60%; height:80%"  formControlName="client">
+                                &nbsp;
+                            <button type="submit" class=" client_button">Add</button>
+                    </div>
+                            
+                    <div *ngIf="clientForm.get('client')?.errors && clientSubmit">
+                        <div *ngIf="clientForm.get('client')?.hasError('required')">
+                          <span style="color: red;">Please Enter Client Name</span>
+                        </div>
+                    </div>
+                    
+            </form>
+            
+            <!-- shows the clientInfo -->
+            <div class="d-flex justify-content-center">
+               <table>
+                   <tr *ngFor="let client of clientList" let i="index" class="shadow">
+                        <td>
+                            {{client.client}}
+                        </td>
+                        <td>
+                            <mat-icon (click)="deleteClient(client)" style="cursor:pointer">cancel</mat-icon>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
